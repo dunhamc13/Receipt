@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Receipt Transformer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 
 <body>
@@ -30,12 +29,36 @@
         </p>
         <p>
             That said, it's pretty stable.  At the time of this writing there is a known bug on transactions involving Cartwheel which causes some items to show up twice, as well as the creation of some incorrect DPCIs.  There may also be a bug related to paper bag fees but I need to do more testing to be sure.  <br> These bugs aside, I've still found this to be useful in saving time.  In the future I'll provide a method for bug reporting as well as instructions and other documentation.
-            <a href="https://github.com/olympiancode/ReceiptTransformer/releases">Releases</a>
+            <br>
+
+            <a id="releaseLink" href="https://github.com/olympiancode/ReceiptTransformer/releases">Releases</a>
         </p>
 
     </main>
     <footer>
-
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+            *{font-family: 'Open Sans', sans-serif;}
+            body{
+                margin: 5%;
+            }
+            header h1 {
+                font-size: 300%;
+                margin: 3% 0 3% 8%;
+            }
+            body main{
+                padding: 2% 5% 2% 5%;
+                border: 1px solid black;
+                border-radius: 8px;
+                background-color: snow; 
+            }
+            #releaseLink{
+                font-size: 200%;
+            }
+            .attention{
+                color:red;
+            }
+        </style>
     </footer>
 </body>
 
