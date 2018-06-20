@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptTransformer", "ReceiptTransformer\ReceiptTransformer.csproj", "{7BA200E2-720C-4A30-A075-9E9615D6CBBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BA200E2-720C-4A30-A075-9E9615D6CBBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA200E2-720C-4A30-A075-9E9615D6CBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA200E2-720C-4A30-A075-9E9615D6CBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA200E2-720C-4A30-A075-9E9615D6CBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAAFB029-6E9A-4B8C-A8B4-A614337AE971}
+	EndGlobalSection
+EndGlobal
