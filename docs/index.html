@@ -14,49 +14,112 @@
 
     </header>
     <main>
-        <h2>A Word From The Developer - </h2>
-        <p>
-            This is a handy tool for quickly turning transactional metadata into a pile of DPCIs that are ready to be pasted into TCM.
-            </p>
-        <p>
-            Some important things to note:
+        <div id="nav">
             <ul>
-                <li><span class="attention">Always</span> double check before submission.</li>
-                <li>There may be <span class="attention">too many</span> or 
-                    <span class="attention">too few</span> entries.</li>
-                    <li>I am not responsible for incorrect evidence in TCM due to a bug in this software.</li>
+                <a href="https://github.com/olympiancode/ReceiptTransformer/releases">
+                    <li>
+                        Releases
+                    </li>
+                </a>
+                <a href="https://github.com/olympiancode/ReceiptTransformer">
+                    <li>
+                        Source
+                    </li>
+                </a>
+                <a href="#">
+                    <li title="Not yet available">
+                        Docs
+                    </li>
+                </a>
             </ul>
-        </p>
-        <p>
-            That said, it's pretty stable.  At the time of this writing there is a known bug on transactions involving Cartwheel which causes some items to show up twice, as well as the creation of some incorrect DPCIs.  There may also be a bug related to paper bag fees but I need to do more testing to be sure.  <br> These bugs aside, I've still found this to be useful in saving time.  In the future I'll provide a method for bug reporting as well as instructions and other documentation.
-            <br>
+        </div>
+        <div id="content">
+            <h2>A Word From The Developer - </h2>
+            <p>
+                This is a handy tool for quickly turning transactional metadata into a pile of DPCIs that are ready to be pasted into TCM.
+            </p>
+            <p>
+                Some important things to note:
+                <ul>
+                    <li>
+                        <span class="attention">Always</span> double check before submission.</li>
+                    <li>There may be
+                        <span class="attention">too many</span> or
+                        <span class="attention">too few</span> entries.</li>
+                    <li>I am not responsible for incorrect evidence in TCM due to a bug in this software.</li>
+                </ul>
+            </p>
+            <p>
+                That said, it's pretty stable. In the latest build there is a fix for a Cartwheel bug that has not yet been tested. 
+                There may also be a bug related to paper bag fees but I need to do more testing to be sure.
+                <br> These bugs aside, I've still found this to be useful in saving time. In the future I'll provide a method
+                for bug reporting as well as instructions and other documentation.
+                <br>
 
-            <a id="releaseLink" href="https://github.com/olympiancode/ReceiptTransformer/releases">Releases</a>
-        </p>
-
+                <a id="releaseLink" href="https://github.com/olympiancode/ReceiptTransformer/releases">Releases</a>
+            </p>
+        </div>
     </main>
     <footer>
         <style>
             @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-            *{font-family: 'Open Sans', sans-serif;}
-            body{
+            * {
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            body {
                 margin: 5%;
             }
+
             header h1 {
                 font-size: 300%;
                 margin: 3% 0 3% 8%;
             }
-            body main{
-                padding: 2% 5% 2% 5%;
+
+            body main {
                 border: 1px solid black;
                 border-radius: 8px;
-                background-color: snow; 
+                background-color: snow;
             }
-            #releaseLink{
+
+            #releaseLink {
                 font-size: 200%;
             }
-            .attention{
-                color:red;
+
+            .attention {
+                color: red;
+            }
+
+            #content {
+                margin: 5% 5% 2% 5%;
+            }
+
+            #nav {
+                float: left;
+                /*border-bottom: 1px solid black;
+                border-right: 1px solid black;
+                border-radius: 0 0 8px 0 ;
+                margin: 0 5% 5% 0;*/
+                padding: 0 5% 0 0;
+
+            }
+
+            #nav ul {
+                list-style-type: none;
+                display: block;
+            }
+
+            #nav ul li {
+                display: block;
+                font-size: 160%;
+                border-bottom: 1px solid black;
+                border-right: 1px solid black;
+                border-radius: 0 0 8px 0 ;
+                padding: 2% 5% 2% 5%;
+            }
+
+            #nav ul a {
+                text-decoration: none;
             }
         </style>
     </footer>
