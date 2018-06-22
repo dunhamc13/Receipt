@@ -60,22 +60,28 @@ namespace ReceiptTransformer
                 try
                 {
                     string thisLine = lines[i];//iteration variable
-                    Regex pattern = new Regex(@"\d{3}:[SK]\d{9}"); //regex pattern
-                    if (pattern.IsMatch(thisLine.Substring(0, 14)))//if this line has a dpci
+                    Regex dpciPattern = new Regex(@"\d{3}:[SK]\d{9}"); //regex pattern for dpci
+                    Regex discountPattern = new Regex(@"\s-\d{1,3}\.\d{2}\s");//pattern for negative price
+                    if (dpciPattern.IsMatch(thisLine.Substring(0, 14)))//if this line has a dpci
                     {
-                        //grab the dpci
-                        string thisDpci = thisLine.Substring(5, 3) + "-" + thisLine.Substring(8, 2) + "-" + thisLine.Substring(10, 4);
-                        //if this line is not voiding a dpci
-                        if (!thisLine.Contains("*VOID LINE*"))
+                        //only proceed if the line doesn't contain cartwheel
+                        //and if the line doesn't subtract from the subtotal (coupon or cartwheel discount applied to a specific dpci)
+                        if (!thisLine.ToUpper().Contains("CARTWHEEL") && !discountPattern.Match(thisLine).Success)
                         {
-                            //add it and increment the counter
-                            dpcis.Add(thisDpci);
-                            count++;
-                        }
-                        else
-                        {//else remove it and decrement the counter
-                            dpcis.Remove(thisDpci);
-                            count--;
+                            //grab the dpci
+                            string thisDpci = thisLine.Substring(5, 3) + "-" + thisLine.Substring(8, 2) + "-" + thisLine.Substring(10, 4);
+                            //if this line is not voiding a dpci
+                            if (!thisLine.Contains("*VOID LINE*"))
+                            {
+                                //add it and increment the counter
+                                dpcis.Add(thisDpci);
+                                count++;
+                            }
+                            else
+                            {//else remove it and decrement the counter
+                                dpcis.Remove(thisDpci);
+                                count--;
+                            }
                         }
                     }
                 }
