@@ -27,9 +27,11 @@ namespace ReceiptTransformer
 
         private void OpenFile(string path)
         {
-            try { 
+            try
+            {
                 lines = System.IO.File.ReadAllLines(path); // get file into string array
-            } catch (ArgumentException ae)
+            }
+            catch (ArgumentException ae)
             {
                 //don't do anything, stop processing
                 return;
@@ -48,6 +50,7 @@ namespace ReceiptTransformer
 
         private void Transform()
         {
+            bool skippingCoupons = false;
 
             if (lines == null)
                 lines = txtInput.Text.Split('\n'); // get text into string array
@@ -57,30 +60,43 @@ namespace ReceiptTransformer
             int count = 0;//init count
             for (int i = 0; i < lines.Length; i++)//for every line of the receipt
             {
+
                 try
                 {
                     string thisLine = lines[i];//iteration variable
-                    Regex dpciPattern = new Regex(@"\d{3}:[SK]\d{9}"); //regex pattern for dpci
-                    Regex discountPattern = new Regex(@"\s-\d{1,3}\.\d{2}\s");//pattern for negative price
-                    if (dpciPattern.IsMatch(thisLine.Substring(0, 14)))//if this line has a dpci
+                    if (thisLine == "*** START COUPON RESPONSE PROCESSING ***    " || thisLine == "*** START COUPON RESPONSE PROCESSING ***    " || thisLine == "*** START COUPON RESPONSE PROCESSING ***    \r" || thisLine == "*** START COUPON RESPONSE PROCESSING ***    \r")
+                        skippingCoupons = true;
+                    else if (thisLine == "*** END COUPON RESPONSE PROCESSING ***      " || thisLine == "*** END COUPON RESPONSE PROCESSING ***      " || thisLine == "*** END COUPON RESPONSE PROCESSING ***      \r" || thisLine == "*** END COUPON RESPONSE PROCESSING ***      \r")
+                        skippingCoupons = false;
+                    if (!skippingCoupons)
                     {
-                        //only proceed if the line doesn't contain cartwheel
-                        //and if the line doesn't subtract from the subtotal (coupon or cartwheel discount applied to a specific dpci)
-                        if (!thisLine.ToUpper().Contains("CARTWHEEL") && !discountPattern.Match(thisLine).Success)
+                        Regex dpciPattern = new Regex(@"\d{3}:[SK]\d{9}\s"); //regex pattern for dpci - whitespace at end ensures it doesn't get a cartwheel code
+                        Regex discountPattern = new Regex(@"\s-\d{1,3}\.\d{2}-\s");//pattern for negative price
+                        if (dpciPattern.IsMatch(thisLine.Substring(0, 15)))//if this line has a dpci
                         {
-                            //grab the dpci
-                            string thisDpci = thisLine.Substring(5, 3) + "-" + thisLine.Substring(8, 2) + "-" + thisLine.Substring(10, 4);
-                            //if this line is not voiding a dpci
-                            if (!thisLine.Contains("*VOID LINE*"))
+                            //only proceed if the line doesn't contain adjust coupon
+                            //and if the line doesn't subtract from the subtotal (coupon or cartwheel discount applied to a specific dpci)
+                            if (!thisLine.ToUpper().Contains("ADJST COUPON") && !discountPattern.Match(thisLine).Success)
                             {
-                                //add it and increment the counter
-                                dpcis.Add(thisDpci);
-                                count++;
-                            }
-                            else
-                            {//else remove it and decrement the counter
-                                dpcis.Remove(thisDpci);
-                                count--;
+                                //grab the dpci
+                                string thisDpci = thisLine.Substring(5, 3) + "-" + thisLine.Substring(8, 2) + "-" + thisLine.Substring(10, 4);
+                                //check if it's a paper bag fee
+                                if (thisDpci == "004-10-0001")
+                                {
+                                    continue;
+                                }
+                                //if this line is not voiding a dpci
+                                if (!thisLine.Contains("*VOID LINE*"))
+                                {
+                                    //add it and increment the counter
+                                    dpcis.Add(thisDpci);
+                                    count++;
+                                }
+                                else
+                                {//else remove it and decrement the counter
+                                    dpcis.Remove(thisDpci);
+                                    count--;
+                                }
                             }
                         }
                     }
