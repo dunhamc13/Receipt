@@ -64,9 +64,13 @@ namespace ReceiptTransformer
                 try
                 {
                     string thisLine = lines[i];//iteration variable
-                    if (thisLine == "*** START COUPON RESPONSE PROCESSING ***    " || thisLine == "*** START COUPON RESPONSE PROCESSING ***    " || thisLine == "*** START COUPON RESPONSE PROCESSING ***    \r" || thisLine == "*** START COUPON RESPONSE PROCESSING ***    \r")
+                    //additional test to see if a phone is being activated.  If it is, remove the last dpci added
+                    if (thisLine == "    PREPAID SERVICE ACTIVATION              " || thisLine == "    PREPAID SERVICE ACTIVATION              \r")
+                        dpcis.RemoveAt(dpcis.Count - 1);
+
+                    if (thisLine == "*** START COUPON RESPONSE PROCESSING ***    " || thisLine == "*** START COUPON RESPONSE PROCESSING ***    \r")
                         skippingCoupons = true;
-                    else if (thisLine == "*** END COUPON RESPONSE PROCESSING ***      " || thisLine == "*** END COUPON RESPONSE PROCESSING ***      " || thisLine == "*** END COUPON RESPONSE PROCESSING ***      \r" || thisLine == "*** END COUPON RESPONSE PROCESSING ***      \r")
+                    else if (thisLine == "*** END COUPON RESPONSE PROCESSING ***      " || thisLine == "*** END COUPON RESPONSE PROCESSING ***      \r")
                         skippingCoupons = false;
                     if (!skippingCoupons)
                     {
