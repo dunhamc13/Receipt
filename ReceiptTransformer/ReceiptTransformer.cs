@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net;
 using Octokit;
+using System.Reflection;
 
 namespace ReceiptTransformer
 {
@@ -21,8 +20,20 @@ namespace ReceiptTransformer
         const string VERSION_NUMBER = "1.0";
         public frmReceiptTransformer()
         {
+            //http://adamthetech.com/2011/06/embed-dll-files-within-an-exe-c-sharp-winforms/
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
+            {
+                string resourceName = new AssemblyName(args.Name).Name + ".dll";
+                string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName));
+
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+                {
+                    Byte[] assemblyData = new Byte[stream.Length];
+                    stream.Read(assemblyData, 0, assemblyData.Length);
+                    return Assembly.Load(assemblyData);
+                }
+            };
             InitializeComponent();
-            CheckForUpdateAsync();
         }
 
         private async void CheckForUpdateAsync()
@@ -159,6 +170,7 @@ namespace ReceiptTransformer
         {
             lblCount.Text = "";
             txtInput.Focus();
+            CheckForUpdateAsync();
         }
 
         private void btnClear_Click(object sender, EventArgs e)

@@ -59,5 +59,35 @@ namespace ReceiptTransformer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Octokit {
+            get {
+                object obj = ResourceManager.GetObject("Octokit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;doc&gt;
+        ///    &lt;assembly&gt;
+        ///        &lt;name&gt;Octokit&lt;/name&gt;
+        ///    &lt;/assembly&gt;
+        ///    &lt;members&gt;
+        ///        &lt;member name=&quot;M:Octokit.Internal.BasicAuthenticator.Authenticate(Octokit.Internal.IRequest,Octokit.Credentials)&quot;&gt;
+        ///            &lt;summary&gt;
+        ///            Authenticate a request using the basic access authentication scheme
+        ///            &lt;/summary&gt;
+        ///            &lt;param name=&quot;request&quot;&gt;The request to authenticate&lt;/param&gt;
+        ///            &lt;param name=&quot;credentials&quot;&gt;The credentials to attach to the request&lt;/pa [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Octokit1 {
+            get {
+                return ResourceManager.GetString("Octokit1", resourceCulture);
+            }
+        }
     }
 }
