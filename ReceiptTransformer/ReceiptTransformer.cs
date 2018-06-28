@@ -7,16 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using System.Net;
+using Octokit;
 
 namespace ReceiptTransformer
 {
     public partial class frmReceiptTransformer : Form
     {
         string[] lines;
+        const string VERSION_NUMBER = "1.0";
         public frmReceiptTransformer()
         {
             InitializeComponent();
+            CheckForUpdateAsync();
         }
+
+        private async void CheckForUpdateAsync()
+        {
+            var client = new GitHubClient(new ProductHeaderValue("ReceiptTransformer"));
+            
+            var latestRelease = await client.Repository.Release.GetLatest("olympiancode", "ReceiptTransformer");
+            if (latestRelease.TagName != VERSION_NUMBER)
+            {
+                linkNewVersion.Visible = true;
+                linkNewVersion.Enabled = true;
+            }
+        }
+
         private void btnOpen_Click(object sender, EventArgs e)
         {
             ResetForm();
@@ -214,6 +234,11 @@ namespace ReceiptTransformer
             {
                 e.Handled = true;
             }
+        }
+
+        private void linkNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/olympiancode/ReceiptTransformer/releases");
         }
     }
 }

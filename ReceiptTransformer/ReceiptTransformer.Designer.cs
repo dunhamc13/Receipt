@@ -37,6 +37,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnOpen = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.linkNewVersion = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnTransform
@@ -141,11 +142,26 @@
             this.txtFilePath.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilePath_KeyPress);
             this.txtFilePath.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFilePath_KeyUp);
             // 
+            // linkNewVersion
+            // 
+            this.linkNewVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkNewVersion.AutoSize = true;
+            this.linkNewVersion.Enabled = false;
+            this.linkNewVersion.Location = new System.Drawing.Point(839, 15);
+            this.linkNewVersion.Name = "linkNewVersion";
+            this.linkNewVersion.Size = new System.Drawing.Size(132, 13);
+            this.linkNewVersion.TabIndex = 8;
+            this.linkNewVersion.TabStop = true;
+            this.linkNewVersion.Text = "A new version is available!";
+            this.linkNewVersion.Visible = false;
+            this.linkNewVersion.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkNewVersion_LinkClicked);
+            // 
             // frmReceiptTransformer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 476);
+            this.Controls.Add(this.linkNewVersion);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.btnClear);
@@ -172,6 +188,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.LinkLabel linkNewVersion;
     }
 }
 
