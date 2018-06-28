@@ -171,7 +171,7 @@
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.btnTransform);
             this.Name = "frmReceiptTransformer";
-            this.Text = "Receipt Transformer - Version 1.0";
+            this.Text = "Receipt Transformer - Version 1.1";
             this.Load += new System.EventHandler(this.frmReceiptTransformer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

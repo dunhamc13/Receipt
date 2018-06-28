@@ -17,7 +17,7 @@ namespace ReceiptTransformer
     public partial class frmReceiptTransformer : Form
     {
         string[] lines;
-        const string VERSION_NUMBER = "1.0";
+        const string VERSION_NUMBER = "1.1";
         public frmReceiptTransformer()
         {
             //http://adamthetech.com/2011/06/embed-dll-files-within-an-exe-c-sharp-winforms/
