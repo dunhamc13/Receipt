@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Net;
-using Octokit;
 using System.Reflection;
 
 namespace ReceiptTransformer
@@ -20,32 +19,7 @@ namespace ReceiptTransformer
         const string VERSION_NUMBER = "1.1";
         public frmReceiptTransformer()
         {
-            //http://adamthetech.com/2011/06/embed-dll-files-within-an-exe-c-sharp-winforms/
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
-            {
-                string resourceName = new AssemblyName(args.Name).Name + ".dll";
-                string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName));
-
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
-                {
-                    Byte[] assemblyData = new Byte[stream.Length];
-                    stream.Read(assemblyData, 0, assemblyData.Length);
-                    return Assembly.Load(assemblyData);
-                }
-            };
             InitializeComponent();
-        }
-
-        private async void CheckForUpdateAsync()
-        {
-            var client = new GitHubClient(new ProductHeaderValue("ReceiptTransformer"));
-            
-            var latestRelease = await client.Repository.Release.GetLatest("olympiancode", "ReceiptTransformer");
-            if (latestRelease.TagName != VERSION_NUMBER)
-            {
-                linkNewVersion.Visible = true;
-                linkNewVersion.Enabled = true;
-            }
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -103,6 +77,13 @@ namespace ReceiptTransformer
                         skippingCoupons = true;
                     else if (thisLine == "*** END COUPON RESPONSE PROCESSING ***      " || thisLine == "*** END COUPON RESPONSE PROCESSING ***      \r")
                         skippingCoupons = false;
+                    //if this line contains manual markdown
+                    if (thisLine.Contains("MKDN"))
+                    {
+                        dpcis.RemoveAt(dpcis.Count-1); //remove last dpci
+                        count--; //decrement count
+                        continue;//go to next line
+                    }
                     if (!skippingCoupons)
                     {
                         Regex dpciPattern = new Regex(@"\d{3}:[SK]\d{9}\s"); //regex pattern for dpci - whitespace at end ensures it doesn't get a cartwheel code
@@ -120,6 +101,7 @@ namespace ReceiptTransformer
                                 {
                                     continue;
                                 }
+
                                 //if this line is not voiding a dpci
                                 if (!thisLine.Contains("*VOID LINE*"))
                                 {
@@ -170,7 +152,6 @@ namespace ReceiptTransformer
         {
             lblCount.Text = "";
             txtInput.Focus();
-            CheckForUpdateAsync();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -248,9 +229,9 @@ namespace ReceiptTransformer
             }
         }
 
-        private void linkNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void btnProblems_Click(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/olympiancode/ReceiptTransformer/releases");
+            Process.Start("https://olympiancode.github.io/ReceiptTransformer/");
         }
     }
 }

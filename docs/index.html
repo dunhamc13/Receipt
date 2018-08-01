@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Receipt Transformer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 
 <body>
@@ -50,70 +51,24 @@
                 </ul>
             </p>
             <p>
-                Version 1.1: Now uses embedded octokit.dll from github to check for new versions and prompt user with a link if one is available. Application is now signed.
-                <br>
-                Version 1.0: Now handles activated phones; does not duplicate DPCIs when reaching activation lines.
-                <br>
-                It should now correctly handle the processing of Cartwheel and coupons, as well as skip any paper bag fees.
+                Version 1.1: No longer duplicates DPCIs related to manual markdown. Application is now signed.
+                <br> Version 1.0: Now handles activated phones; does not duplicate DPCIs when reaching activation lines.
+                <br> It should now correctly handle the processing of Cartwheel and coupons, as well as skip any paper bag fees.
                 <br>
 
 
-        
+
                 <a id="releaseLink" href="https://github.com/olympiancode/ReceiptTransformer/releases">Releases</a>
+                <br>
+                <div id="problems">
+                    <p>If you're having problems, check to see if you're using the latest <a href="https://github.com/olympiancode/ReceiptTransformer/releases">release</a>.
+                        If it's still not working, use <a href="yammer.com/target.com">Yammer</a> to message TPS John McMahon at T0607 with as much detail about what's not working as you can.</p>
+                </div>
             </p>
         </div>
     </main>
     <footer>
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-            * {
-                font-family: 'Open Sans', sans-serif;
-            }
 
-            body {
-                margin: 5%;
-            }
-            
-        
-            header h1 {
-                font-size: 300%;
-                margin: 3% 0 3% 8%;
-            }
-
-            body main {
-                border: 1px solid black;
-                border-radius: 8px;
-                background-color: snow;
-            }
-
-            #releaseLink {
-                font-size: 200%;
-            }
-
-            .attention {
-                color: red;
-            }
-
-            #content {
-                margin: 5% 5% 2% 5%;
-            }
-
-            #nav {
-                float: left;
-                /*border-bottom: 1px solid black;
-                border-right: 1px solid black;
-                border-radius: 0 0 8px 0 ;
-                margin: 0 5% 5% 0;*/
-                padding: 0 5% 0 0;
-
-            }
-
-            #nav ul {
-                list-style-type: none;
-                display: block;
-            }
-            *{border: none !important;}
-        </style>
     </footer>
 </body>
 
